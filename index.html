@@ -1880,47 +1880,147 @@
         }
 
         /* 分享面板 */
-        .share-options {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            padding: 16px 0;
-        }
-
-        .share-btn {
+        .share-nav-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
+            gap: 14px;
+            padding: 8px 4px 4px;
         }
 
-        .share-btn:hover {
+        .share-nav-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .share-qr-box {
+            width: 180px;
+            height: 180px;
+            background: #fff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .share-qr-box canvas,
+        .share-qr-box img {
+            width: 164px;
+            height: 164px;
+        }
+
+        .share-qr-hint {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            text-align: center;
+        }
+
+        .share-link-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .share-link-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .share-link-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .share-link-input {
+            flex: 1;
+            height: 38px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 0 12px;
+            font-size: 12px;
+            outline: none;
+        }
+
+        .share-link-input:focus {
+            border-color: var(--accent-primary);
+        }
+
+        .share-copy-btn {
+            height: 38px;
+            padding: 0 18px;
+            border-radius: 10px;
+            border: none;
+            background: var(--accent-gradient);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.25s;
+        }
+
+        .share-copy-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .share-copy-btn:active {
+            transform: scale(0.96);
+        }
+
+        .share-actions {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            width: 100%;
+            padding-top: 6px;
+        }
+
+        .share-action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .share-action-btn:hover {
             transform: translateY(-2px);
         }
 
-        .share-icon {
+        .share-action-icon {
             width: 48px;
             height: 48px;
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .share-icon svg {
+        .share-action-icon svg {
             width: 24px;
             height: 24px;
             stroke: #fff;
         }
 
-        .share-icon.wechat { background: var(--share-wechat); }
-        .share-icon.friend { background: var(--share-friend); }
-        .share-icon.copy { background: var(--ice-blue); }
-        .share-icon.save { background: var(--share-save); }
+        .share-action-icon.wechat { background: #07C160; }
+        .share-action-icon.friend { background: #FA9D3B; }
+        .share-action-icon.saveqr { background: #9b7db5; }
 
-        .share-label {
+        .share-action-label {
             font-size: 11px;
             color: var(--text-secondary);
         }
@@ -2965,19 +3065,45 @@
                 font-size: 13px;
             }
 
-            /* 快捷分享面板 */
-            .share-options {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 8px;
+            /* 分享面板 */
+            .share-nav-container {
+                gap: 10px;
+                padding: 4px 0;
             }
 
-            .share-icon {
-                width: 40px;
-                height: 40px;
-                border-radius: 10px;
+            .share-qr-box {
+                width: 150px;
+                height: 150px;
             }
 
-            .share-icon svg {
+            .share-qr-box canvas,
+            .share-qr-box img {
+                width: 136px;
+                height: 136px;
+            }
+
+            .share-link-input {
+                height: 34px;
+                font-size: 11px;
+            }
+
+            .share-copy-btn {
+                height: 34px;
+                padding: 0 14px;
+                font-size: 12px;
+            }
+
+            .share-actions {
+                gap: 18px;
+            }
+
+            .share-action-icon {
+                width: 42px;
+                height: 42px;
+                border-radius: 12px;
+            }
+
+            .share-action-icon svg {
                 width: 20px;
                 height: 20px;
             }
@@ -4550,32 +4676,134 @@
         }
 
         function openShareModal() {
-            openModal('分享', `
-                <div class="share-options">
-                    <div class="share-btn" onclick="shareToWechat()">
-                        <div class="share-icon wechat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-                        <span class="share-label">微信</span>
+            const permaUrl = getPermaLink();
+            openModal('分享导航系统', `
+                <div class="share-nav-container">
+                    <div class="share-nav-title">扫码访问导航</div>
+                    <div class="share-qr-box" id="shareQrBox">
+                        <canvas id="qrCanvas" width="164" height="164"></canvas>
                     </div>
-                    <div class="share-btn" onclick="shareToFriend()">
-                        <div class="share-icon friend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-                        <span class="share-label">朋友圈</span>
+                    <div class="share-qr-hint">使用微信/QQ等扫码打开</div>
+                    <div class="share-link-section">
+                        <div class="share-link-label">分享链接</div>
+                        <div class="share-link-row">
+                            <input class="share-link-input" type="text" value="${permaUrl}" readonly onclick="this.select()">
+                            <button class="share-copy-btn" onclick="copyPermaLink()">复制</button>
+                        </div>
                     </div>
-                    <div class="share-btn" onclick="copyLink()">
-                        <div class="share-icon copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
-                        <span class="share-label">复制链接</span>
-                    </div>
-                    <div class="share-btn" onclick="saveScreenshot()">
-                        <div class="share-icon save"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-                        <span class="share-label">保存图片</span>
+                    <div class="share-actions">
+                        <button class="share-action-btn" onclick="shareToWechat()">
+                            <div class="share-action-icon wechat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                            <span class="share-action-label">微信</span>
+                        </button>
+                        <button class="share-action-btn" onclick="shareToFriend()">
+                            <div class="share-action-icon friend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                            <span class="share-action-label">朋友圈</span>
+                        </button>
+                        <button class="share-action-btn" onclick="downloadQRCode()">
+                            <div class="share-action-icon saveqr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                            <span class="share-action-label">保存二维码</span>
+                        </button>
                     </div>
                 </div>
             `);
+            setTimeout(() => {
+                const canvas = document.getElementById('qrCanvas');
+                if (canvas) {
+                    const ctx = canvas.getContext('2d');
+                    const size = 164;
+                    canvas.width = size;
+                    canvas.height = size;
+                    const img = new Image();
+                    img.crossOrigin = 'anonymous';
+                    img.onload = function() {
+                        ctx.clearRect(0, 0, size, size);
+                        ctx.drawImage(img, 0, 0, size, size);
+                    };
+                    img.onerror = function() {
+                        ctx.fillStyle = '#f0f0f0';
+                        ctx.fillRect(0, 0, size, size);
+                        ctx.fillStyle = '#666';
+                        ctx.font = '12px "Microsoft YaHei","PingFang SC",sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('二维码加载中...', size/2, size/2 - 10);
+                        ctx.fillText('请检查网络连接', size/2, size/2 + 12);
+                    };
+                    img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=164x164&data=' + encodeURIComponent(permaUrl);
+                }
+            }, 100);
+        }
+
+        function generateQRCode(url) {
+            const canvas = document.getElementById('qrCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const size = 164;
+            canvas.width = size;
+            canvas.height = size;
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function() {
+                ctx.clearRect(0, 0, size, size);
+                ctx.drawImage(img, 0, 0, size, size);
+            };
+            img.onerror = function() {
+                ctx.fillStyle = '#f0f0f0';
+                ctx.fillRect(0, 0, size, size);
+                ctx.fillStyle = '#666';
+                ctx.font = '12px "Microsoft YaHei","PingFang SC",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('二维码加载中...', size/2, size/2 - 10);
+                ctx.fillText('请检查网络连接', size/2, size/2 + 12);
+            };
+            img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=164x164&data=' + encodeURIComponent(url);
+        }
+
+        // 生成永久链接（GitHub Pages 优先，否则使用当前 URL）
+        function getPermaLink() {
+            const currentUrl = window.location.href;
+            if (typeof PERMA_LINK !== 'undefined' && PERMA_LINK) {
+                return PERMA_LINK;
+            }
+            try {
+                const url = new URL(currentUrl);
+                return url.origin + url.pathname;
+            } catch(e) {
+                return currentUrl;
+            }
+        }
+
+        function copyPermaLink() {
+            const link = getPermaLink();
+            navigator.clipboard.writeText(link).then(() => {
+                showTip('链接已复制');
+            }).catch(() => {
+                showTip('链接: ' + link);
+            });
+        }
+
+        function downloadQRCode() {
+            const permaUrl = getPermaLink();
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                canvas.width = 300;
+                canvas.height = 300;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, 300, 300);
+                const link = document.createElement('a');
+                link.download = '校园导航二维码.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                showTip('二维码已保存');
+            };
+            img.onerror = function() { showTip('下载失败，请检查网络'); };
+            img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(permaUrl);
         }
 
         function shareToWechat() { showTip('请截图后分享到微信'); }
         function shareToFriend() { showTip('请截图后分享到朋友圈'); }
-        function copyLink() { navigator.clipboard.writeText(window.location.href); showTip('链接已复制'); }
-        function saveScreenshot() { showTip('请使用浏览器截图功能(Ctrl+Shift+S)'); closeModal(); }
 
         function openFeedbackModal() {
             openModal('意见反馈', `
